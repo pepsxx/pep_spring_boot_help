@@ -1,11 +1,9 @@
 package ru.pepsxx.spring.boot.help.pep_pro_spring_boot_help;
 
-import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.env.Environment;
-import org.springframework.core.metrics.ApplicationStartup;
 import ru.pepsxx.spring.boot.help.pep_pro_spring_boot_help.v001.TestBean1;
 import ru.pepsxx.spring.boot.help.pep_pro_spring_boot_help.v002.TestBean2;
 import ru.pepsxx.spring.boot.help.pep_pro_spring_boot_help.v003.TestBean3Prototype;
@@ -19,11 +17,16 @@ import ru.pepsxx.spring.boot.help.pep_pro_spring_boot_help.v005.Music5Set;
 import ru.pepsxx.spring.boot.help.pep_pro_spring_boot_help.v006.Player6Const;
 import ru.pepsxx.spring.boot.help.pep_pro_spring_boot_help.v006.Player6Field;
 import ru.pepsxx.spring.boot.help.pep_pro_spring_boot_help.v006.Player6Seter;
+import ru.pepsxx.spring.boot.help.pep_pro_spring_boot_help.v008.entity.Person8;
+import ru.pepsxx.spring.boot.help.pep_pro_spring_boot_help.v008.repository.TestRepository8;
+
+import java.sql.SQLException;
+import java.util.List;
 
 @SpringBootApplication
 public class PepProSpringBootHelpApplication {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
 
         System.out.println("""
                 --------------------------------------------------
@@ -146,6 +149,64 @@ public class PepProSpringBootHelpApplication {
 
         System.out.println("s1 = " + s1);
         System.out.println("s2 = " + s2);
+
+        System.out.println("""
+                --------------------------------------------------
+                
+                v008_data_jpa
+                Зависимости:
+                1.  spring-boot-starter-data-jpa
+                2.  postgresql
+                Настройки:
+                spring:
+                    datasource:
+                        url: jdbc:postgresql://localhost:40554/postgres
+                        username: admin
+                        password: qQ111111
+                        driver-class-name: org.postgresql.Driver
+                Необязательные настройки:
+                spring:
+                    jpa:
+                        show-sql: true
+                        properties.hibernate.format_sql: true
+                """);
+
+        TestRepository8 testRepository = context.getBean(TestRepository8.class);
+
+        Person8 person1 = testRepository.findById(1L);
+        System.out.println("person1 = " + person1);
+        System.out.println("--------------------------------------------------");
+
+        List<Person8> personList2 = testRepository.findByName("Billi");
+        personList2.forEach(System.out::println);
+        System.out.println("--------------------------------------------------");
+
+        List<Person8> personList3 = testRepository.findAllBy();
+        personList3.forEach(System.out::println);
+        System.out.println("--------------------------------------------------");
+
+        System.out.println("""
+                Spring Data
+                порядок разрешения запросов
+                
+                1
+                Аннотация @Query в репозитории
+                @Query("FROM Person p WHERE p.id = 10")
+                List<Person> findAllBy();
+                
+                2
+                Аннотация @NamedQuery в классе-сущности
+                Над entity:
+                @NamedQuery(
+                name = "Person.findAllBy",
+                query = "FROM Person p WHERE p.id = 20")
+                +
+                В репозитории:
+                List<Person> findAllBy();
+                
+                3
+                Волшебные методы
+                List<Person> findAllBy();""");
 
         System.out.println("""
                 --------------------------------------------------
