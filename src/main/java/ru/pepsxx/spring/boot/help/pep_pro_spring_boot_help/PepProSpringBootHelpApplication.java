@@ -1,9 +1,26 @@
 package ru.pepsxx.spring.boot.help.pep_pro_spring_boot_help;
 
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
+import jakarta.annotation.Resource;
+import jakarta.persistence.Persistence;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.PersistenceUnit;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
+import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.CommonAnnotationBeanPostProcessor;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.ConfigurationClassPostProcessor;
+import org.springframework.context.event.EventListener;
+import org.springframework.context.event.EventListenerMethodProcessor;
 import org.springframework.core.env.Environment;
+import org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor;
 import ru.pepsxx.spring.boot.help.pep_pro_spring_boot_help.v001.TestBean1;
 import ru.pepsxx.spring.boot.help.pep_pro_spring_boot_help.v002.TestBean2;
 import ru.pepsxx.spring.boot.help.pep_pro_spring_boot_help.v003.TestBean3Prototype;
@@ -60,8 +77,8 @@ public class PepProSpringBootHelpApplication {
                 
                 v003_scope
                 Scope задается аннотацией @Scope
-                @Scope("singleton") - Возвращается всё врем я один и тот же бин
-                @Scope("prototype") - Возвращается каждый раз новый бин
+                @Scope(BeanDefinition.SCOPE_SINGLETON) - Возвращается всё врем я один и тот же бин
+                @Scope(BeanDefinition.SCOPE_PROTOTYPE) - Возвращается каждый раз новый бин
                 """);
 
         TestBean3Singleton testBean3Singleton1 = context.getBean("testBean3Singleton", TestBean3Singleton.class);
@@ -186,6 +203,7 @@ public class PepProSpringBootHelpApplication {
         System.out.println("--------------------------------------------------");
 
         System.out.println("""
+                v009_order_of_resolution_of_requests
                 Spring Data
                 порядок разрешения запросов
                 
