@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>ru.pepsxx.spring.boot.help</groupId>
-    <artifactId>pep_pro_spring_boot_help</artifactId>
+    <artifactId>pep_spring_boot_help</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>pep_pro_spring_boot_help</name>
     <description>pep_pro_spring_boot_help</description>
