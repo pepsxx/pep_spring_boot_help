@@ -229,12 +229,12 @@ public class PepProSpringBootHelpApplication {
         System.out.println("""
                 --------------------------------------------------
                 
-                v010_compose
+                v010_docker_compose
                 Зависимости:
                 1.  spring-boot-docker-compose
                 
                 Настройки в compose.yml:
-                name: pep_pro_spring_boot_help-40554        # Имя compose stack
+                name: pep_spring_help-40554                 # Имя compose stack
                 services:
                     my_name:                                # Имя ?
                         container_name: PostgresSQL-40554   # Имя container в stack
