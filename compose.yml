@@ -1,0 +1,11 @@
+name: pep_pro_spring_boot_help-40554  # Имя compose stack
+services:
+  my_name:                            # Имя ?
+    container_name: PostgresSQL-40554 # Имя container в stack
+    image: postgres                   # Название образа на котором основан контейнер
+    ports:
+      - "40554:5432"                  # forwarding port
+    environment:
+      POSTGRES_USER: admin            # Имя администратора db
+      POSTGRES_PASSWORD: qQ111111     # Пароль администратора db
+      POSTGRES_DB: pep_db             # Имя db

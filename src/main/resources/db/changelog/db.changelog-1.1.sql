@@ -1,3 +1,5 @@
+--liquibase formatted sql
+--changeset pep_sxx:1
 --https://www.mockaroo.com/
 
 --Person
@@ -60,6 +62,7 @@ insert into Person (name, age) values ('Charo', 62);
 insert into Person (name, age) values ('Lenette', 54);
 insert into Person (name, age) values ('Fairleigh', 30);
 
+--changeset pep_sxx:2
 insert into Item (description, person_id) values ('Toys', 43);
 insert into Item (description, person_id) values ('Books', 6);
 insert into Item (description, person_id) values ('Tools', 24);

@@ -1,10 +1,10 @@
 yml.name: TestNameFromFileProperties-yml
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:40554/postgres
-    username: admin
-    password: qQ111111
-    driver-class-name: org.postgresql.Driver
+    username: admin                               # Имя администратора db
+    password: qQ111111                            # Пароль администратора db
+    driver-class-name: org.postgresql.Driver      # Драйвер db
+    url: jdbc:postgresql://localhost:40554/pep_db # url db
   jpa:
     show-sql: true
 #    properties.hibernate.format_sql: true
